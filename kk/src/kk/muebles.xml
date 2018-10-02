@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<muebles>
+  <dormitorio>
+      <escritorio color="marrón" tamaño="1x0,5m"/>
+      <cama color="rojo" tamaño="1,3x2m"/>
+      <armario color="blanco" tamaño="1,5x2m"/>
+      <estanteria color="marrón" tamaño="1x1,5"/>
+  </dormitorio>
+</muebles>

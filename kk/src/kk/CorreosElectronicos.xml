@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE emails SYSTEM "CorreosElectronicos.dtd">
+<emails>
+	<email>
+		<para></para>
+		<cc></cc>
+		<cco></cco>
+		<asunto></asunto>
+		<texto></texto>
+		<adjunto>
+			<nombre></nombre>
+			<mime-type></mime-type>
+			<longitud></longitud>
+		</adjunto>
+	</email>
+</emails>

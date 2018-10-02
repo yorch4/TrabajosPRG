@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+   <factura>
+        <desatascarFregadero duracion="1h" precio="75€"/>
+        <arreglarGrifo duracion="25m" precio="50€"/>
+        <termoElectrico duracion="1h25m" precio="368€"/>
+        <arreglarGotera duracion="10m" precio="20€"/> 
+     </factura>
