@@ -1,8 +1,8 @@
-package kk;
+package Programacion;
 
 import javax.swing.JOptionPane;
 
-public class ejercicioC4 {
+public class ejercicioC5 {
 	
 	public static void main (String args[]) {
 	
@@ -16,6 +16,35 @@ public class ejercicioC4 {
 	int num4 = Integer.parseInt(numero4); 
 	String numero5 = JOptionPane.showInputDialog("Introduce un número");
 	int num5 = Integer.parseInt(numero5);
+	{
+		if (num1 >= num2 && num1 >= num3 && num1 >= num4 && num1 >= num5) {
+			System.out.println("El número mayor es " + num1);
+		}
+		else {
+		{
+			if (num2 >= num1 && num2 >= num3 && num2 >= num4 && num2 >= num5) {
+				System.out.println("El número mayor es " + num2);
+		    }
+			else {
+				if (num3 >= num2 && num3 >= num1 && num3 >= num4 && num3 >= num5) {
+					System.out.println("El número mayor es " + num3);
+			    }
+				else {
+					if (num4 >= num2 && num4 >= num3 && num4 >= num1 && num4 >= num5) {
+						System.out.println("El número mayor es " + num4);
+			        }
+					else {
+						if (num5 >= num2 && num5 >= num3 && num5 >= num4 && num5 >= num1) {
+							System.out.println("El número mayor es " + num5);
+					}
+		
+		}	
+			
+		}
+	}
+}
+}
+}
 	{
 		if (num1 <= num2 && num1 <= num3 && num1 <= num4 && num1 <= num5) {
 			System.out.println("El número menor es " + num1);
@@ -36,10 +65,20 @@ public class ejercicioC4 {
 						if (num5 <= num2 && num5 <= num3 && num5 <= num4 && num5 <= num1) {
 							System.out.println("El número menor es " + num5);
 					    } 
+		
+	
+		
+		
+			
+		
+
+			
+		
+			
 		}
 	}
 }
 }
-}
 	}
+}
 }

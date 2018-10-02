@@ -1,4 +1,4 @@
-package kk;
+package Programacion;
 
 import javax.swing.JOptionPane;
 
@@ -7,15 +7,15 @@ public class ejercicioC6 {
 	public static void main (String args[]) {
 		
 	}
-	String numero = JOptionPane.showInputDialog("Escribe un número");
+	String numero = JOptionPane.showInputDialog("Escribe un nï¿½mero");
 	int num = Integer.parseInt(numero);
 	{
 	int resto = num % 2;
 	if (resto == 0) {
-		System.out.println("El número es par");
+		System.out.println("El nï¿½mero es par");
 	}
 		else {
-			System.out.println("El número es impar");
+			System.out.println("El nï¿½mero es impar");
 }
 }
 }	

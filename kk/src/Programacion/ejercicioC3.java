@@ -1,4 +1,4 @@
-package kk;
+package Programacion;
 
 import javax.swing.JOptionPane;
 
