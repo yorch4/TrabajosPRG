@@ -9,7 +9,7 @@ public class Bloque3Ejercicio4 {
 	int devolver = cantidadRecibida - importe;
 	int monedas100 = devolver / 100;
 	int resto100 = monedas100 % 100;
-	int monedas50 = (devolver % 100) / 50;
+	int monedas50 = resto100 / 50;
 	int resto50 = monedas50 % 50;
 	int monedas25 = resto50 / 25;
 	int resto25 = monedas25 % 25;
