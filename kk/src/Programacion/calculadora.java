@@ -16,7 +16,7 @@ public class calculadora {
 		case 1: //Raiz de un número
 			num1 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el radicando"));
 			num2 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el índice"));
-			JOptionPane.showMessageDialog(null, "Resultado: " + (Math.pow(num1, (1/num2))) );
+			JOptionPane.showMessageDialog(null, "Resultado: " + (Math.pow(num1, 1/num2)) );
 			break;
 		
 		case 2: //Potencia de un número
