@@ -8,7 +8,7 @@ public class BucleEjercicio3 {
 		int numerosNegativos = 0;
 		int numerosPositivos = 0;
 		int i;
-		int a = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos numeros desea ingresar?"));
+		int a = Integer.parseInt(JOptionPane.showInputDialog("ï¿½Cuantos numeros desea ingresar?"));
 		
 		for (i = 0; i < a; i++) {
 			int num = Integer.parseInt(JOptionPane.showInputDialog("Escribe un numero"));
@@ -19,7 +19,9 @@ public class BucleEjercicio3 {
 					numerosPositivos++;
 			}
 		}
+		
 		System.out.println("Numeros positivos: " + numerosPositivos);
 		System.out.println("Numeros negativos: " + numerosNegativos);
+		
 		}
 	}
