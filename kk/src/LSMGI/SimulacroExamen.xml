@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE muebles [
+	<!ENTITY % caracteristicas "color (marron | blanco| rojo) #REQUIRED  medida CDATA #REQUIRED">
+	
+	<!ELEMENT muebles (habitaciones+)>
+	<!ELEMENT habitaciones (dormitorio, cocina)*>
+	<!ELEMENT dormitorio (cama?, mesitaDeNoche?, armario?)*>
+	<!ELEMENT cocina (mesa?)>
+	<!ELEMENT cama (#PCDATA)>
+	<!ELEMENT mesitaDeNoche EMPTY>
+	<!ATTLIST mesitaDeNoche %caracteristicas;>
+	<!ELEMENT armario EMPTY>
+	<!ATTLIST armario %caracteristicas;>
+	<!ELEMENT mesa EMPTY>
+	<!ATTLIST mesa %caracteristicas;>
+]>
+
+<muebles>
+	<habitaciones>
+		<dormitorio>
+			<cama> "Cama roja de medidas 1 x 1,3m" </cama>
+			<mesitaDeNoche color="marron" medida=".7 x 0,5m"/>
+			<armario color="blanco" medida="2 x 1m"/>
+		</dormitorio>
+		<cocina>
+			<mesa color="rojo" medida="1 x 1,5 m"/>
+		</cocina>
+	</habitaciones>
+<muebles/>
+
