@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE muebles [
-	<!ENTITY % caracteristicas "color (marron | blanco| rojo) #REQUIRED  medida CDATA #REQUIRED">
-	
+	<!ENTITY % caracteristicas "color (marron | blanco | rojo) #REQUIRED  medida CDATA #IMPLIED">
 	<!ELEMENT muebles (habitaciones+)>
 	<!ELEMENT habitaciones (dormitorio, cocina)*>
 	<!ELEMENT dormitorio (cama?, mesitaDeNoche?, armario?)*>
