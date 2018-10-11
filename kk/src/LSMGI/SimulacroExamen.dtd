@@ -1,14 +1,14 @@
-	<!ENTITY num "1">
-	<!ENTITY % caracteristicas "color (marron | blanco | rojo) #REQUIRED  medida CDATA #IMPLIED">
-	<!ELEMENT muebles (habitaciones+)>
-	<!ELEMENT habitaciones (dormitorio | cocina)*>
-	<!ELEMENT dormitorio (cama?, mesitaDeNoche?, armario?)*>
-	<!ELEMENT cocina (mesa?)>
-	<!ELEMENT cama (#PCDATA)>
-	<!ELEMENT mesitaDeNoche EMPTY>
-	<!ATTLIST mesitaDeNoche %caracteristicas;>
-	<!ELEMENT armario EMPTY>
-	<!ATTLIST armario %caracteristicas;>
-	<!ELEMENT mesa EMPTY>
-	<!ATTLIST mesa color (marron | blanco | rojo) #REQUIRED medida CDATA #FIXED "1 x 1,5m">
+<!ENTITY num "1">
+<!ENTITY % caracteristicas "color (marron | blanco | rojo) #REQUIRED  medida CDATA #IMPLIED">
+<!ELEMENT muebles (habitaciones+)>
+<!ELEMENT habitaciones (dormitorio | cocina)*>
+<!ELEMENT dormitorio (cama?, mesitaDeNoche?, armario?)*>
+<!ELEMENT cocina (mesa?)>
+<!ELEMENT cama (#PCDATA)>
+<!ELEMENT mesitaDeNoche EMPTY>
+<!ATTLIST mesitaDeNoche %caracteristicas;>
+<!ELEMENT armario EMPTY>
+<!ATTLIST armario %caracteristicas;>
+<!ELEMENT mesa EMPTY>
+<!ATTLIST mesa color (marron | blanco | rojo) #REQUIRED medida CDATA #FIXED "1 x 1,5m">
 
