@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE muebles SYSTEM "SimulacroExamen.dtd">
+<muebles>
+	<habitaciones>
+		<dormitorio>
+			<cama> "Cama roja de medidas 1 x 1,3m" </cama>
+			<mesitaDeNoche color="marron" medida=".7 x 0,5m"/>
+			<armario color="blanco" medida="2 x &num;m"/>
+		</dormitorio>
+		<cocina>
+			<mesa color="rojo" medida="&num; x 1,5m"/>
+		</cocina>
+	</habitaciones>
+</muebles>
+

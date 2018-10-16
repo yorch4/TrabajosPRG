@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE placa [
+	<!ELEMENT placa (placa1 | placa2)*>
+	<!ELEMENT placa1 (microprocesador | memoria | modelo | fabricante)*>
+	<!ELEMENT placa2 (microprocesador | memoria | modelo | fabricante)*>
+	<!ELEMENT microprocesador (#PCDATA)>
+	<!ELEMENT memoria (#PCDATA)>
+	<!ELEMENT modelo (#PCDATA)>
+	<!ELEMENT fabricante (Asus|Intel)>
+	<!ELEMENT Asus EMPTY>
+	<!ELEMENT Intel EMPTY>
+]>
+<placa>
+	<placa1> 
+		<microprocesador>Intel Core i5-8600K</microprocesador>
+		<memoria>64 GB</memoria>
+		<modelo>TUF H370-PRO Gaming</modelo>
+		<fabricante><Asus/></fabricante>
+	 </placa1>
+	<placa2>
+		<microprocesador>Intel Core i7-8700</microprocesador>
+		<memoria>32GB</memoria>
+		<modelo>B75 Motherboard</modelo>
+		<fabricante><Intel/></fabricante>
+	</placa2>
+</placa>
