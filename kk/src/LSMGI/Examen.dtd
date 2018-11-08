@@ -1,0 +1,19 @@
+<!ELEMENT TeatrosLucena (teatro*)>
+<!ENTITY tamaño "500m2">
+<!ENTITY % atributoNumero "numero CDATA #IMPLIED">
+<!ELEMENT teatro (personas ,tamaño?, actor+, (obraDia1* | obraDia2*), amigos?)>
+<!ATTLIST teatro nombre CDATA #REQUIRED>
+<!ELEMENT personas EMPTY>
+<!ATTLIST personas %atributoNumero;>
+<!ELEMENT tamaño (#PCDATA | largo)*>
+<!ELEMENT largo (#PCDATA)>
+<!ELEMENT actor EMPTY>
+<!ELEMENT obraDia1 EMPTY>
+<!ATTLIST actor nombre ID #IMPLIED>
+<!ATTLIST obraDia1 nombre CDATA #FIXED "El Mago de Oz">
+<!ATTLIST obraDia1 protagonistas IDREFS #IMPLIED>
+<!ATTLIST obraDia1 estrella IDREF #IMPLIED>
+<!ELEMENT obraDia2 EMPTY>
+<!ATTLIST obraDia2 nombre (CaperucitaRosa | ReyLeon) #IMPLIED>
+<!ELEMENT amigos EMPTY>
+<!ATTLIST amigos %atributoNumero;>

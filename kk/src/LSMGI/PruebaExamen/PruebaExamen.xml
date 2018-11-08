@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PruebaExamen.xsd">
+	<personajesPrincipales casa="Lannister">
+		<personaje nombre="Tyrion" años="20"/>
+	</personajesPrincipales>
+ 	<personajesSecundarios nombre="Drogo">34</personajesSecundarios>
+	<lideres>
+		<familia nombre="Stark" ejercito="24000"/>
+	</lideres>
+ 	<lugares nombre="poniente"/>
+	<datos dimension="87 grande"/>
+ 	<familias localizacion="Dorne">
+ 		<nombre>Tyrell</nombre>
+ 		<emblema>Flor</emblema>
+ 	</familias>
+</serie> 

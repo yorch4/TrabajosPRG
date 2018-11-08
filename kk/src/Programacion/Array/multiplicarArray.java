@@ -11,8 +11,10 @@ public class multiplicarArray {
 		for (int i = 0; i < 100; i++) {
 			int num = (int) Math.round(Math.random()* 100);
 			array[i] = num;
+			System.out.println("Array antiguo: " + array[i]);
 			num = multiplicador * num;     
-			System.out.println(array[i]);
+			array[i] = num;
+			System.out.println("Array nuevo: " + array[i] + "\n");
 		}
 	}
 }

@@ -11,6 +11,8 @@ public class ArrayCambiaSigno {
 		for (int i = 0; i < 100; i++) {
 			num = (int) Math.round(Math.random() * (200) - 100);
 			array[i] = num;
+			System.out.println(array[i]);
+			
 			if (array[i] % 2 == 0) {
 				pares = array[i] * (-1);
 				System.out.println(pares);

@@ -20,7 +20,7 @@ public class TresArrays {
 				array3[i] = array1[i];
 		
 			}
-			System.out.println("Array [" + i + "] " + array3[i]);
+			System.out.println("Array3 [" + i + "] " + array3[i]);
 		}		
 	}
 }		

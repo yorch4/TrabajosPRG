@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="serie" type="juegoDeTronos"/>
+  
+  <xs:complexType name="juegoDeTronos">
+  	<xs:sequence>
+  		<xs:element name="personajesPrincipales" type="tipoPersonajePrincipal"/>
+  		<xs:element name="personajesSecundarios" type="tipoPersonajeSecundario" maxOccurs="unbounded"/>
+  		<xs:element name="lideres" type="tipoLideres"/>
+  		<xs:element name="lugares" type="tipoLugar" maxOccurs="unbounded"/>
+  		<xs:element name="datos" type="tipoDatos" maxOccurs="unbounded"/>
+  		<xs:element name="familias" type="tipoFamilias" maxOccurs="unbounded"/>
+  	</xs:sequence>
+  </xs:complexType>
+  
+  
+  
+  <xs:complexType name="Casa">
+  	<xs:all>
+  		<xs:element name="nombre" type="xs:string"/>
+  		<xs:element name="emblema" type="xs:string"/>
+  	</xs:all>
+  </xs:complexType>
+  
+  
+  
+  <xs:complexType name="tipoFamilias">
+    <xs:complexContent>
+      <xs:extension base="Casa">
+        <xs:attribute name="localizacion" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="tipoDatos">
+  	<xs:attribute name="dimension" type="dimensiones"/>
+  </xs:complexType>
+
+  
+  <xs:simpleType name="dimension0-1000">
+  	<xs:restriction base="xs:integer">
+  		<xs:minInclusive value="1"/>
+  		<xs:maxInclusive value="100"/>
+  	</xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="dimensionDescrita">
+  	<xs:restriction base="xs:string">
+  		<xs:enumeration value="pequeño"/>
+  		<xs:enumeration value="mediano"/>
+  		<xs:enumeration value="grande"/>
+  	</xs:restriction>
+  </xs:simpleType>
+  
+  
+  <xs:simpleType name="dimension">
+  	<xs:union memberTypes="dimension0-1000 dimensionDescrita"/>
+  </xs:simpleType>
+  
+  
+  <xs:simpleType name="dimensiones">
+  	<xs:list itemType="dimension"/>
+  </xs:simpleType>
+  
+  
+  <xs:complexType name="tipoLugar">
+  	<xs:attribute name="nombre">
+  		<xs:simpleType>
+  			<xs:restriction base="xs:string">
+  				<xs:pattern value="[a-z]{8}"/>
+  			</xs:restriction>
+  		</xs:simpleType>
+  	</xs:attribute>
+  </xs:complexType>
+  
+  
+  
+  <xs:complexType name="tipoLideres">
+  	
+  	<xs:choice>
+  		<xs:element name="especie">
+  			<xs:complexType>
+  				<xs:attribute name="bando">
+  					<xs:simpleType>
+  						<xs:restriction base="xs:string">
+  							<xs:enumeration value="muerto"/>
+  							<xs:enumeration value="no-muertos"/>
+  						</xs:restriction>
+  					</xs:simpleType>
+  				</xs:attribute>
+  			</xs:complexType>
+  		</xs:element>
+  		<xs:element name="familia">
+  			<xs:complexType>
+  			<xs:attribute name="nombre"/>
+  				<xs:attribute name="ejercito">
+  					<xs:simpleType>
+  						<xs:restriction base="xs:integer">
+  							<xs:minInclusive value="0"/>
+  							<xs:maxInclusive value="700000"/>
+  						</xs:restriction>
+  					</xs:simpleType>
+  				</xs:attribute>
+  			</xs:complexType>
+  		</xs:element>
+  	</xs:choice>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="tipoPersonajeSecundario">
+      <xs:simpleContent>
+        <xs:extension base="xs:integer">
+          <xs:attribute name="nombre" type="xs:string" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  
+  
+  <xs:complexType name="tipoPersonajePrincipal" mixed="true">
+  	<xs:sequence>
+  		<xs:element name="personaje" type="tipoPersonajesPrincipal" maxOccurs="unbounded"/>
+  	</xs:sequence>
+  	<xs:attribute name="casa" type="xs:string"/>
+  </xs:complexType>
+
+
+
+  <xs:complexType name="tipoPersonajesPrincipal">
+	<xs:attribute name="nombre" type="xs:string"/>
+	<xs:attribute name="años" type="xs:integer"/>
+  </xs:complexType>
+
+</xs:schema>

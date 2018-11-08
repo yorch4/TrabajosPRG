@@ -17,7 +17,7 @@ public class ArrayInverso {
 			System.out.println(array[i] + "  ");
 			
 		}
-		System.out.println("--------------------------------");
+		System.out.println("---------------- INVERSO ----------------");
 		for (int i = 149; i > 0 ; i--) {
 			System.out.println(array[i] + "  ");
 		}

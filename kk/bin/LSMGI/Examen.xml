@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TeatrosLucena SYSTEM "Examen.dtd">
+
+<TeatrosLucena>
+	<teatro nombre="Teatrín">
+		<personas numero="460"></personas>
+		<tamaño> &tamaño; </tamaño>
+		<actor nombre="Juan"/>
+		<actor nombre="Maria"/>
+		<obraDia1 nombre="El Mago de Oz"></obraDia1>
+		<obraDia1 protagonistas="Juan Maria"></obraDia1>
+		<obraDia1 estrella="Juan"></obraDia1>
+	</teatro>
+	<teatro nombre="Espectáculo">
+		<personas></personas>
+		<tamaño></tamaño>
+		<actor nombre="Pedro"></actor>
+		<actor nombre="Elena"></actor>
+		<obraDia2 nombre="CaperucitaRosa"></obraDia2>
+		<amigos numero="20"></amigos>
+	</teatro>
+</TeatrosLucena>

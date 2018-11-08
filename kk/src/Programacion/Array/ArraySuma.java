@@ -1,4 +1,4 @@
-package Programacion.Array;import javax.swing.JOptionPane;
+package Programacion.Array;
 
 public class ArraySuma {
 	public static void main (String args[]) {
