@@ -2,10 +2,12 @@ package Programacion.Ahorcado;
 
 	import java.awt.Canvas;
 	import java.awt.Color;
+	import java.awt.Font;
 	import java.awt.Graphics;
-
 	import javax.swing.JFrame;
 	import javax.swing.JPanel;
+
+
 
 	// La clase extiende de Canvas, se trata de un lienzo sobre el cual podemos pintar
 	// libremente.
@@ -15,7 +17,7 @@ package Programacion.Ahorcado;
 		// de la ventana
 		public static final int WIDTH = 640;
 		public static final int HEIGHT = 480;
-
+		public static Ventana ventana = null;
 		
 		public Ventana () {
 			// La clase JFrame nos permite mostrar una ventana en pantalla
@@ -42,13 +44,37 @@ package Programacion.Ahorcado;
 			ventana.setResizable(false);
 		}
 		
-		
-		
-		/**
-		 * Sobrescribimos el m�todo "paint" que tienen todos los componentes gr�ficos en AWT-SWING
-		 */
 		@Override
 		public void paint(Graphics g) {
+			
+			
+			
+			//Imagen
+			g.drawImage(CacheImagenes.getCache().getImagen("farWest.png"), 0, 0, this);
+			
+			String palabra = "";
+			String error = "";
+
+				for (int i=0; i<Juego.coincidencias.length;i++) {
+					palabra+=Juego.coincidencias[i] + " ";
+				}
+				
+				g.setFont(new Font("Console", Font.BOLD, 20));
+				g.setColor(Color.red);
+				g.drawString(palabra, 200, 350);
+				
+				for (int i=0; i<Juego.errores.length;i++) {
+					error+=Juego.errores[i] + " ";
+					if (error == null) {
+						error = "";
+					}
+				}
+				g.setFont(new Font("Console", Font.BOLD, 20));
+				g.setColor(Color.red);
+				g.drawString(error, 50, 50);
+			
+			
+		
 			
 			g.setColor(Color.decode("#7f5900"));
 			g.fillRect(438, 50, 3, 70);
@@ -106,10 +132,13 @@ package Programacion.Ahorcado;
 			g.setColor(Color.decode("#ffcc99"));
 			g.fillRect(420, 271, 20, 80);
 			
-			for (int i = 0; i < Juego.palabra.length(); i++) {
-			g.drawString(Juego.coincidencias(i), WIDTH, HEIGHT);
-			}
 			
+		}
+		public static Ventana getVentana() {
+			if (ventana == null) {
+				ventana = new Ventana();
+			}
+			return ventana;
 		}
 
 	}

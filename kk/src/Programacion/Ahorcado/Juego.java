@@ -21,12 +21,16 @@ public class Juego {
 				System.out.print(" " + coincidencias[i] + " ");
 					
 			}
+			for (int i = 0; i<palabra.length(); i++) {
+				errores[i] = "";
+			}
 			do {
 				error=true;
 				respuesta = JOptionPane.showInputDialog("Introduce letra o palabra");
 			
 				if (respuesta.length() > 1 && !respuesta.equals(palabra)) {
 					contErrores++;
+					Ventana.getVentana().repaint();
 					errores[indiceArray] = respuesta;
 					System.out.println("\n\t\t\t\t Errores: ");
 					System.out.print("\t\t\t\t");
@@ -49,12 +53,14 @@ public class Juego {
 								contBandera--;
 								coincidencias[i] = letra;
 								error = false;
+								Ventana.getVentana().repaint();
 							}
 							System.out.print(" " + coincidencias[i] + " ");	
 					}
 					
 					if (error==true) {
 						contErrores++;
+						Ventana.getVentana().repaint();
 						errores[indiceArray] = respuesta;
 						System.out.println("\n\t\t\t\t Errores: ");
 						System.out.print("\t\t\t\t");
