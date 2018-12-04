@@ -30,4 +30,16 @@ public class CacheImagenes {
 			return null;
 		}
 	}
+	public BufferedImage getImagenNavidad(String Navidad) {
+		URL url=null;
+		try {
+			url = getClass().getResource("/Programacion/Ahorcado/" + Navidad);
+			return ImageIO.read(url);
+		} catch (Exception e) {
+			System.out.println("No se pudo cargar la imagen " + Navidad +" de "+url);
+			System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
+			System.exit(0);
+			return null;
+		}
+	}
 }
