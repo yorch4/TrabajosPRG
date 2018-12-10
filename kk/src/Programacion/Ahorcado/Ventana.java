@@ -81,7 +81,7 @@ package Programacion.Ahorcado;
 				//Imprimo los errores
 				g.setFont(new Font("Console", Font.BOLD, 20));
 				g.setColor(Color.red);
-				g.drawString(error, 50, 50);
+				g.drawString(error, 150, 15);
 				
 				g.setColor(Color.decode("#7f5900"));
 				g.fillRect(438, 50, 3, 70);
@@ -94,6 +94,11 @@ package Programacion.Ahorcado;
 				
 				g.setColor(Color.black);
 				g.fillRect(50, 400, 140, 20);
+				
+				//Imprimo contador errores
+				g.setFont(new Font("Console", Font.BOLD, 20));
+				g.setColor(Color.red);
+				g.drawString("Contador errores: " + Juego.contErrores, 50, 50);
 					
 				if (Juego.contErrores >= 1 && Juego.contErrores <=6) {
 					//Cabeza
@@ -156,7 +161,7 @@ package Programacion.Ahorcado;
 				if (Juego.ganar == true) {
 					g.setFont(new Font("Console", Font.BOLD, 90));
 					g.setColor(Color.green);
-					g.drawString("HAS GANADO", 25, 200);
+					g.drawString("WINNER", 25, 200);
 				}
 				//Has perdido
 				if (Juego.perder == true) {
@@ -205,7 +210,7 @@ package Programacion.Ahorcado;
 				//Imprimo los errores
 				g.setFont(new Font("Console", Font.BOLD, 20));
 				g.setColor(Color.red);
-				g.drawString(error, 50, 50);
+				g.drawString(error, 150, 15);
 				
 				g.setColor(Color.decode("#7f5900"));
 				g.fillRect(438, 50, 3, 70);
@@ -218,6 +223,11 @@ package Programacion.Ahorcado;
 				
 				g.setColor(Color.blue);
 				g.fillRect(50, 400, 140, 20);
+				
+				//Imprimo contador errores
+				g.setFont(new Font("Console", Font.BOLD, 20));
+				g.setColor(Color.red);
+				g.drawString("Contador errores: " + Juego.contErrores, 50, 50);
 					
 				if (Juego.contErrores >= 1 && Juego.contErrores <=6) {
 					//Cabeza
@@ -337,7 +347,7 @@ package Programacion.Ahorcado;
 				if (Juego.ganar == true) {
 					g.setFont(new Font("Console", Font.BOLD, 90));
 					g.setColor(Color.green);
-					g.drawString("HAS GANADO", 25, 200);
+					g.drawString("WINNER", 25, 200);
 				}
 				//Has perdido
 				if (Juego.perder == true) {
