@@ -1,0 +1,63 @@
+ .container{max-width:1200px; margin:0 auto}
+                .clearfix{clear:both}
+                .web-header .top-line, .web-header .bottom-line{float:left; width:100%}
+                .web-header .logo {
+                  float:left;
+                  margin: 2px;
+                  width: 68px;
+                }
+                 .web-header .banner {
+                  
+                     float:left;
+                      margin: 2px;
+                      border: 1px solid #ccc;
+                     width: 500px;
+                     
+                }
+                .web-header .nav {
+                  list-style-type: none;
+                  margin: 0;
+                  padding: 0;
+                  overflow: hidden;
+                  font-family: "Open Sans", sans-serif;
+                  background-color: #207016;
+                }
+
+                .web-header .nav li {
+                  float: left;
+                  border-right:1px solid #ffffff;
+                }
+
+                .web-header .nav li a {
+                  display: block;
+                  color: white;
+                  text-align: center;
+                  padding: 14px 16px;
+                  text-decoration: none;
+                }
+
+                .web-header .nav li a:hover {
+                  background-color: #597500;
+                }
+                .web-header .nav li:last-child{
+                    border-right:0px;
+                }
+                .img-main{float:left; width:100%; height:450px; background-image:url(../Imagenes/imgMain.jpg); background-size:cover; margin-bottom: 30px}
+                .img-main .text{float:right; margin-right:123px; margin-top:100px; color:#FFF}
+                .img-info{float:left; width:100%; height:450px; background-image:url(../Imagenes/imgInfo.jpg); background-size:cover; margin-bottom: 30px}
+                .img-info .text{float:right; margin-right:40px; margin-top:70px; color:#000}
+                .img-nuestrosAnimales{float:left; width:100%; height:450px; background-image:url(../Imagenes/nuestrosAnimales.jpg); background-size:cover; margin-bottom: 30px}
+                .img-nuestrosAnimales .text{float:left; margin-left:300px; margin-top:50px; color:aliceblue}
+                .img-espectaculos{float:left; width:100%; height:450px; background-image:url(../Imagenes/imgEspectaculo.jpg); background-size:cover; margin-bottom: 30px}
+                .img-espectaculos .text{float:left; margin-left:250px; margin-top:100px; color:aliceblue}
+                .img-servicios{float:left; width:100%; height:450px; background-image:url(../Imagenes/imgServicios.jpg); background-size:cover; margin-bottom: 30px}
+                .img-servicios .text{float:right; margin-right:370px; margin-top:160px; color:#000}
+                
+                .web-footer{float:left; width:100%; border-top:4px solid #207016;}
+                .web-footer .logo{float:left;}
+                .web-footer .social{float:right;margin-top: 10px;}
+
+                .btn-theme{background-color:#207016; color:#FFF; padding:5px 15px; border:0px; border-radius:4px}
+                .form-theme{padding:5px; border-radius:3px; border:1px solid #DDD; margin-bottom:15px}
+
+.video{width:560px; margin:10px auto}
