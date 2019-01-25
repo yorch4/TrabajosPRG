@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -16,10 +17,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Ventana extends Canvas {
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 640;
 	public static final int SPEED = 10;
-	public int posX,posY,vX, vY;
+	public int posX,posY;
+	public float vX, vY;
 	
 	public BufferStrategy strategy;
 	public HashMap sprites;
@@ -90,9 +92,10 @@ public class Ventana extends Canvas {
 		}
 	}
 	public void paintWorld() {
+		Toolkit.getDefaultToolkit().sync();
 		Graphics g = strategy.getDrawGraphics();
-		g.setColor(Color.white);
-		g.fillRect(0,0,getWidth(),getHeight());
+		g.setColor(Color.black);
+		g.drawImage(getSprite("fondo.jpg"), 0,0,getWidth(),getHeight(), this);
 		g.drawImage(getSprite("pelota.png"), posX, posY,this);
 		strategy.show();
 	}
@@ -101,7 +104,7 @@ public class Ventana extends Canvas {
 		posX += vX;
 		posY += vY;
 		if (posX < 0 || posX > (WIDTH - 23)) vX = -vX;
-		if (posY < 0 || posY > (HEIGHT - 35)) vY = -vY;
+		if (posY < 0 || posY > (HEIGHT - 50)) vY = -vY;
 	}
 	
 	public static void main(String[] args) {
