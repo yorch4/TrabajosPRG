@@ -6,8 +6,19 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import Programacion.Ahorcado.CacheImagenes;
+import Programacion.Ahorcado.Ventana;
+
 public class SpriteCache {
 	private HashMap sprites;
+	private static SpriteCache cache= null;
+	
+	public static SpriteCache getCache() {
+		if (cache == null) {
+			cache = new SpriteCache();
+		}
+		return cache;
+	}
 	
 	public SpriteCache() {
 		sprites = new HashMap();

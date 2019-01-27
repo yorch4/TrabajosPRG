@@ -1,8 +1,27 @@
 package Programacion.Arkanoid.Version1;
 
 public class Pelota extends Objetos {
+protected int vx;
+protected int vy;
+	
+	public Pelota(Stage stage) {
+		super(stage);
+		setSpriteName("pelota.png");
+	}
+	
+	public void act() {
+		x+=vx;
+		y+=vy;
+		if (x < 0 || x > Stage.WIDTH - getWidth()) 
+		  vx = -vx;
+		if (y < 0 || y > Stage.HEIGHT) 
+			  vy = -vy;
+	}
 
-	int vx;
-	int vy;
+	public int getVx() { return vx; }
+	public void setVx(int i) {vx = i;	}
+	
+	public int getVy() { return vy; }
+	public void setVy(int i) {vy = i;	}
 	
 }

@@ -4,16 +4,17 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Objetos {
-	int x, y;
-	int height, width;
-	String spriteName;
-	Stage stage;
-	SpriteCache spriteCache;
+	protected int x,y;
+	protected int width, height;
+	protected String spriteName;
+	protected Stage stage;
+	protected SpriteCache spriteCache;
 	
 	public Objetos(Stage stage) {
 		this.stage = stage;
 		spriteCache = stage.getSpriteCache();
 	}
+	
 	
 	public void paint(Graphics2D g){
 		g.drawImage( spriteCache.getSprite(spriteName), x,y, stage );
@@ -40,5 +41,7 @@ public class Objetos {
 
 	public void act() { }
 	
-
+	public void collision(Objetos a){
+		
+	}
 }
