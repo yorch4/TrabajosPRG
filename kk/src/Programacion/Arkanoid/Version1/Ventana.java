@@ -1,13 +1,14 @@
 package Programacion.Arkanoid.Version1;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Ventana extends Canvas implements Stage, KeyListener, MouseListener {
+public class Ventana extends Canvas implements Stage{
 
 	private BufferStrategy strategy;
 	private long usedTime;
@@ -25,13 +26,11 @@ public class Ventana extends Canvas implements Stage, KeyListener, MouseListener
 	private ArrayList objetos;
 	private Nave nave;
 	private Pelota pelota;
-	private boolean mouseEntered = false;
-	private boolean mouseExited = true;
 
 	public Ventana() {
 		spriteCache = new SpriteCache();
 
-		JFrame ventana = new JFrame("Arkanoid");
+		JFrame ventana = new JFrame("Arkanoid Mario Bros");
 		JPanel panel = (JPanel) ventana.getContentPane();
 		setBounds(0, 0, Stage.WIDTH, Stage.HEIGHT);
 		panel.setPreferredSize(new Dimension(Stage.WIDTH, Stage.HEIGHT));
@@ -48,8 +47,22 @@ public class Ventana extends Canvas implements Stage, KeyListener, MouseListener
 		createBufferStrategy(2);
 		strategy = getBufferStrategy();
 		requestFocus();
-		addKeyListener(this);
-		addMouseListener(this);
+		
+		this.addKeyListener (new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				nave.keyReleased(e);
+			}
+			public void keyPressed(KeyEvent e) {
+				nave.keyPressed(e);
+			}
+		});
+
+		this.addMouseMotionListener(new MouseAdapter() {
+			public void mouseMoved (MouseEvent e) {
+				nave.mouseMoved(e);
+			}
+		
+		});
 	}
 
 	public void initWorld() {
@@ -137,14 +150,41 @@ public class Ventana extends Canvas implements Stage, KeyListener, MouseListener
 		}
 
 	}
+	
+	public void checkCollisions() {
+		Rectangle pelotaBounds = pelota.getBounds();
+		Rectangle naveBounds = nave.getBounds();
+		for (int i = 0; i < objetos.size(); i++) {
+			Objetos a1 = (Objetos)objetos.get(i);
+			Rectangle r1 = a1.getBounds();
+			if (r1.intersects(pelotaBounds)) {
+				pelota.collision(a1);
+				a1.collision(pelota);
+			}
+		  for (int j = i+1; j < objetos.size(); j++) {
+		  	Objetos a2 = (Objetos)objetos.get(j);
+		  	Rectangle r2 = a2.getBounds();
+		  	if (r1.intersects(r2)) {
+		  		a1.collision(a2);
+		  		a2.collision(a1);
+		  	}
+		  }
+		}
+		if (pelotaBounds.intersects(naveBounds)) {
+			pelota.collision(nave);
+		}
+	}
 
 	public void paintWorld() {
+		Toolkit.getDefaultToolkit().sync();
 		Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
 		g.drawImage(SpriteCache.getCache().getSprite("fondo.jpg"), 0, 0, this);
 
 		for (int i = 0; i < objetos.size(); i++) {
 			Ladrillos ladrillos = (Ladrillos)objetos.get(i);
-			ladrillos.paint(g);
+			if (!ladrillos.isTouched) {
+				ladrillos.paint(g);
+			}
 		}
 
 		
@@ -152,49 +192,22 @@ public class Ventana extends Canvas implements Stage, KeyListener, MouseListener
 
 		nave.paint(g);
 
-		g.setColor(Color.red);
-		if (usedTime > 0)
-			g.drawString(String.valueOf(1000 / usedTime) + " fps", 0, Stage.HEIGHT - 50);
-		else
-			g.drawString("--- fps", 0, Stage.HEIGHT - 50);
 		strategy.show();
+	}
+	
+	public void remove() {
+		for (int i = 0; i < objetos.size(); i++) {
+			Ladrillos ladrillos = (Ladrillos)objetos.get(i);
+			if (ladrillos.isTouched) {
+				objetos.remove(i);
+			}
+		}
 	}
 
 	public SpriteCache getSpriteCache() {
 		return spriteCache;
 	}
-	public void keyPressed(KeyEvent e) {
-		nave.keyPressed(e);
-	}
-	
-	public void keyReleased(KeyEvent e) {
-		nave.keyReleased(e);
-	}
-	public void keyTyped(KeyEvent e) {}
-	@Override
-	public void mouseClicked(MouseEvent e) {}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		mouseExited = false;
-		mouseEntered = true;
 		
-		nave.mouseEntered(e);
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		mouseExited = true;
-		mouseEntered = false;
-		nave.mouseExited(e);
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {}
-
 	public void game() {
 		usedTime = 1000;
 		initWorld();
@@ -202,6 +215,8 @@ public class Ventana extends Canvas implements Stage, KeyListener, MouseListener
 			long startTime = System.currentTimeMillis();
 			updateWorld();
 			paintWorld();
+			checkCollisions();
+			remove();
 			usedTime = System.currentTimeMillis() - startTime;
 			try {
 				Thread.sleep(SPEED);

@@ -50,15 +50,10 @@ public class Nave extends Objetos {
 	  	updateSpeed();
 	  }
 	  
-	  public void mouseEntered(MouseEvent e) {
-		 mousePosition = e.getX();
-		 System.out.println("Estoy dentro");
-		 x = mousePosition;
-		
-	  }
-	  public void mouseExited(MouseEvent e) {
-			System.out.println("Estoy fuera");
-		  }
+	  public void mouseMoved(MouseEvent arg0) {
+		x = arg0.getXOnScreen() - (getWidth() * 2);
+		act();
+		}
 	
 	public int getVx() { return vx; }
 	public void setVx(int i) {vx = i;	}

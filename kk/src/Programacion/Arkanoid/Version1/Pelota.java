@@ -17,6 +17,15 @@ protected int vy;
 		if (y < 0 || y > Stage.HEIGHT) 
 			  vy = -vy;
 	}
+	
+	public void collision(Objetos a){
+		if (a instanceof Ladrillos) {
+			vy = -vy;
+		}
+		if (a instanceof Nave) {
+			vy = -vy;
+		}
+	}
 
 	public int getVx() { return vx; }
 	public void setVx(int i) {vx = i;	}
