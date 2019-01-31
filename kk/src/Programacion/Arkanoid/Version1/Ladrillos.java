@@ -4,7 +4,6 @@ public class Ladrillos extends Objetos {
 	private Explosion explosion;
 	
 	protected boolean doExplosion = false;
-	protected boolean isTouched = false;
 	
 	public Ladrillos(Stage stage) {
 		super(stage);

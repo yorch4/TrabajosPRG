@@ -27,7 +27,7 @@ public class Ventana extends Canvas implements Stage{
 	private SpriteCache spriteCache;
 	private Nave nave;
 	private Pelota pelota;
-	private Explosion explosion;
+	private List<Explosion> explosion = new ArrayList<Explosion>();
 	List<Objetos> objetos = new ArrayList<Objetos>();
 
 	public Ventana() {
@@ -70,6 +70,7 @@ public class Ventana extends Canvas implements Stage{
 
 	public void initWorld() {
 		objetos = new ArrayList();
+		explosion = new ArrayList();
 		
 		int alturaBloquesR = 0;
 		int alturaBloquesA = 0;
@@ -149,8 +150,27 @@ public class Ventana extends Canvas implements Stage{
 		nave.act();
 		for (int i = 0; i < objetos.size(); i++) {
 			Objetos ladrillos = (Objetos)objetos.get(i);
-			ladrillos.act();
+			if (ladrillos.isTouched) {
+				Explosion e = new Explosion(this);
+	            e.setX(ladrillos.getX());
+	            e.setY(ladrillos.getY());
+	            explosion.add(e);
+	            objetos.remove(i);
+			}
 		}
+	     for (int i = 0; i < explosion.size();) {
+	            Objetos m = (Objetos) explosion.get(i);
+	            if (m.isTouched) {
+	               explosion.remove(i);
+	            } else {
+	                i++;
+	            }
+	        }
+        for (int i = 0; i < explosion.size(); i++) {
+            Objetos m = (Objetos) explosion.get(i);
+            m.act();
+        }
+   
 
 	}
 	
@@ -187,15 +207,17 @@ public class Ventana extends Canvas implements Stage{
 			Ladrillos ladrillos = (Ladrillos)objetos.get(i);
 			if (!ladrillos.isTouched) {
 				ladrillos.paint(g);
-				
 			}
-			if (ladrillos.doExplosion) {
-				explosion = new Explosion(this);
-				explosion.setX(ladrillos.getX());
-				explosion.setY(ladrillos.getY());
-				explosion.paint(g);
-				ladrillos.doExplosion = false;
+			
+			
+		}
+		
+		for (int i = 0; i < explosion.size(); i++) {
+			Objetos pum = (Objetos)explosion.get(i);
+			if (!pum.isTouched) {
+				pum.paint(g);
 			}
+			
 			
 		}
 
@@ -207,14 +229,7 @@ public class Ventana extends Canvas implements Stage{
 		strategy.show();
 	}
 	
-	public void remove() {
-		for (int i = 0; i < objetos.size(); i++) {
-			Ladrillos ladrillos = (Ladrillos)objetos.get(i);
-			if (ladrillos.isTouched) {
-				objetos.remove(i);
-			}
-		}
-	}
+	
 
 	public SpriteCache getSpriteCache() {
 		return spriteCache;
@@ -228,7 +243,7 @@ public class Ventana extends Canvas implements Stage{
 			updateWorld();
 			paintWorld();
 			checkCollisions();
-			remove();
+			
 			int millisUsados = (int) (System.currentTimeMillis() - millisAntesDeConstruirEscena);
 			try { 
 				int millisADetenerElJuego = 1000 / FPS - millisUsados;

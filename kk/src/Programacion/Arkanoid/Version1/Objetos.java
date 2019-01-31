@@ -13,6 +13,7 @@ public class Objetos {
 	protected int t;
 	protected Stage stage;
 	protected SpriteCache spriteCache;
+	protected boolean isTouched = false;
 	
 	public Objetos(Stage stage) {
 		this.stage = stage;
@@ -51,17 +52,18 @@ public class Objetos {
 	public int getFrameSpeed() {return frameSpeed;	}
 	public void setFrameSpeed(int i) {frameSpeed = i;	}
 
-	public void act() { }
+	public void act() {	t++;
+	if (t % frameSpeed == 0){
+		t=0;
+		currentFrame = (currentFrame + 1) % spriteNames.length;
+	}
+	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle(x,y,width,height);
 	}
 	
 	public void collision(Objetos a){
-		t++;
-		if (t % frameSpeed == 0){
-			t=0;
-  		currentFrame = (currentFrame + 1) % spriteNames.length;
-		}
+	
 	}
 }
