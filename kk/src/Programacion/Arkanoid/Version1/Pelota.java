@@ -6,7 +6,7 @@ protected int vy;
 	
 	public Pelota(Stage stage) {
 		super(stage);
-		setSpriteName("pelota.png");
+		setSpriteNames( new String[] {"pelota.png"});
 	}
 	
 	public void act() {

@@ -4,6 +4,6 @@ public class LadrillosRojos extends Ladrillos {
 	
 	public LadrillosRojos(Stage stage) {
 		super(stage);
-		setSpriteName("redBricks.png");
+		setSpriteNames( new String[] {"redBricks.png"});
 	}
 }

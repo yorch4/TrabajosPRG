@@ -12,7 +12,7 @@ public class Nave extends Objetos {
 	
 	public Nave(Stage stage) {
 		super(stage);
-		setSpriteName("nave.png");
+		setSpriteNames( new String[] {"nave.png"});
 	}
 	
 	public void act() {

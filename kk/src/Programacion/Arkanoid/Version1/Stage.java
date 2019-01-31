@@ -5,7 +5,6 @@ import java.awt.image.ImageObserver;
 public interface Stage extends ImageObserver {
 	public static final int WIDTH=480;
 	public static final int HEIGHT=740;
-	public static final int SPEED=10;
 	public SpriteCache getSpriteCache();
 
 }

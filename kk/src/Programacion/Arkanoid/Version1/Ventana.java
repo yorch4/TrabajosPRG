@@ -1,6 +1,7 @@
 package Programacion.Arkanoid.Version1;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -13,23 +14,25 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Ventana extends Canvas implements Stage{
-
+	public static final int FPS=100;
 	private BufferStrategy strategy;
 	private long usedTime;
 
 	private SpriteCache spriteCache;
-	private ArrayList objetos;
 	private Nave nave;
 	private Pelota pelota;
+	private Explosion explosion;
+	List<Objetos> objetos = new ArrayList<Objetos>();
 
 	public Ventana() {
 		spriteCache = new SpriteCache();
-
+		
 		JFrame ventana = new JFrame("Arkanoid Mario Bros");
 		JPanel panel = (JPanel) ventana.getContentPane();
 		setBounds(0, 0, Stage.WIDTH, Stage.HEIGHT);
@@ -184,7 +187,16 @@ public class Ventana extends Canvas implements Stage{
 			Ladrillos ladrillos = (Ladrillos)objetos.get(i);
 			if (!ladrillos.isTouched) {
 				ladrillos.paint(g);
+				
 			}
+			if (ladrillos.doExplosion) {
+				explosion = new Explosion(this);
+				explosion.setX(ladrillos.getX());
+				explosion.setY(ladrillos.getY());
+				explosion.paint(g);
+				ladrillos.doExplosion = false;
+			}
+			
 		}
 
 		
@@ -212,16 +224,18 @@ public class Ventana extends Canvas implements Stage{
 		usedTime = 1000;
 		initWorld();
 		while (isVisible()) {
-			long startTime = System.currentTimeMillis();
+			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
 			paintWorld();
 			checkCollisions();
 			remove();
-			usedTime = System.currentTimeMillis() - startTime;
-			try {
-				Thread.sleep(SPEED);
-			} catch (InterruptedException e) {
-			}
+			int millisUsados = (int) (System.currentTimeMillis() - millisAntesDeConstruirEscena);
+			try { 
+				int millisADetenerElJuego = 1000 / FPS - millisUsados;
+				if (millisADetenerElJuego >= 0) {
+					 Thread.sleep(millisADetenerElJuego);
+				}
+			} catch (InterruptedException e) {}
 		}
 	}
 
