@@ -19,7 +19,7 @@ public class Ladrillos extends Objetos {
 		if (a instanceof Pelota) {
 			isTouched = true;
 			doExplosion = true;
-			
+			stage.getSoundCache().playSound("choque.wav");
 		}
 	}
 	

@@ -19,19 +19,23 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+
 public class Ventana extends Canvas implements Stage{
 	public static final int FPS=100;
 	private BufferStrategy strategy;
 	private long usedTime;
-
+	
+	private SoundCache soundCache;
 	private SpriteCache spriteCache;
 	private Nave nave;
 	private Pelota pelota;
 	private List<Explosion> explosion = new ArrayList<Explosion>();
-	List<Objetos> objetos = new ArrayList<Objetos>();
+	private List<Objetos> objetos = new ArrayList<Objetos>();
 
 	public Ventana() {
 		spriteCache = new SpriteCache();
+		soundCache = new SoundCache();
 		
 		JFrame ventana = new JFrame("Arkanoid Mario Bros");
 		JPanel panel = (JPanel) ventana.getContentPane();
@@ -71,6 +75,7 @@ public class Ventana extends Canvas implements Stage{
 	public void initWorld() {
 		objetos = new ArrayList();
 		explosion = new ArrayList();
+		soundCache.loopSound("musica.wav");
 		
 		int alturaBloquesR = 0;
 		int alturaBloquesA = 0;
@@ -142,6 +147,8 @@ public class Ventana extends Canvas implements Stage{
 		nave = new Nave(this);
 		nave.setX(Stage.WIDTH / 2 - (nave.getWidth() / 2));
 		nave.setY(Stage.WIDTH + (Stage.WIDTH / 3));
+		
+	
 
 	}
 
@@ -233,6 +240,9 @@ public class Ventana extends Canvas implements Stage{
 
 	public SpriteCache getSpriteCache() {
 		return spriteCache;
+	}
+	public SoundCache getSoundCache() {
+		return soundCache;
 	}
 		
 	public void game() {

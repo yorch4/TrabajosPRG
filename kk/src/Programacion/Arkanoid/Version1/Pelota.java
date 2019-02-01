@@ -23,6 +23,7 @@ protected int vy;
 			vy = -vy;
 		}
 		if (a instanceof Nave) {
+			stage.getSoundCache().playSound("salto.wav");
 			vy = -vy;
 		}
 	}
