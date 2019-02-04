@@ -61,12 +61,19 @@ public class Ventana extends Canvas implements Stage{
 			}
 			public void keyPressed(KeyEvent e) {
 				nave.keyPressed(e);
+				pelota.keyPressed(e);
 			}
 		});
 
 		this.addMouseMotionListener(new MouseAdapter() {
 			public void mouseMoved (MouseEvent e) {
 				nave.mouseMoved(e);
+			}
+		
+		});
+		this.addMouseListener(new MouseAdapter() {
+			public void mouseClicked (MouseEvent e) {
+				pelota.mouseClicked(e);
 			}
 		
 		});
@@ -138,22 +145,35 @@ public class Ventana extends Canvas implements Stage{
 		      
 		      anchoTotalV =2 +  anchoTotalV + ladrilloV.getWidth();
 		    }
-		pelota = new Pelota(this);
-		pelota.setX(Stage.WIDTH / 2);
-		pelota.setY(Stage.HEIGHT / 3);
-		pelota.setVx(3);
-		pelota.setVy(3);
-
+		 
 		nave = new Nave(this);
 		nave.setX(Stage.WIDTH / 2 - (nave.getWidth() / 2));
 		nave.setY(Stage.WIDTH + (Stage.WIDTH / 3));
+			
+		pelota = new Pelota(this);
+		pelota.setX(nave.x + nave.getWidth() + 2);
+		pelota.setY(nave.y + pelota.getHeight());
+		pelota.setVx(3);
+		pelota.setVy(3);
+
+		
 		
 	
 
 	}
 
-	public void updateWorld() {
-		pelota.act();
+	public void updateWorld() { 
+		if (pelota.lanzado) {
+			pelota.act();
+		} else {
+			 int cincoSegundos =(int) System.currentTimeMillis();
+			if (cincoSegundos >= 5000) {
+				pelota.lanzado = true;
+				pelota.act();
+			} else {
+				pelotaPegada();
+			}
+		}
 		nave.act();
 		for (int i = 0; i < objetos.size(); i++) {
 			Objetos ladrillos = (Objetos)objetos.get(i);
@@ -234,6 +254,11 @@ public class Ventana extends Canvas implements Stage{
 		nave.paint(g);
 
 		strategy.show();
+	}
+	
+	public void pelotaPegada() {
+		pelota.x = nave.x + nave.getWidth() + 2;
+		pelota.y = nave.y - pelota.getHeight();
 	}
 	
 	

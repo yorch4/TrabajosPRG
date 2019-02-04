@@ -7,7 +7,6 @@ public class Nave extends Objetos {
 	protected int vx;
 	protected static final int PLAYER_SPEED = 4;
 	private boolean left,right;
-	private int mousePosition;
 	
 	
 	public Nave(Stage stage) {
