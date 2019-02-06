@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public class Ventana extends Canvas implements Stage{
 	public static final int FPS=100;
 	private BufferStrategy strategy;
-	private long usedTime;
+	private long cincoSegundos;
 	
 	private SoundCache soundCache;
 	private SpriteCache spriteCache;
@@ -166,7 +166,6 @@ public class Ventana extends Canvas implements Stage{
 		if (pelota.lanzado) {
 			pelota.act();
 		} else {
-			 int cincoSegundos =(int) System.currentTimeMillis();
 			if (cincoSegundos >= 5000) {
 				pelota.lanzado = true;
 				pelota.act();
@@ -257,7 +256,7 @@ public class Ventana extends Canvas implements Stage{
 	}
 	
 	public void pelotaPegada() {
-		pelota.x = nave.x + nave.getWidth() + 2;
+		pelota.x = nave.x + nave.getWidth()/2 + 2;
 		pelota.y = nave.y - pelota.getHeight();
 	}
 	
@@ -271,12 +270,15 @@ public class Ventana extends Canvas implements Stage{
 	}
 		
 	public void game() {
-		usedTime = 1000;
+		cincoSegundos = 1000;
+		long millisAntes = System.currentTimeMillis();
 		initWorld();
 		while (isVisible()) {
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
+			cincoSegundos= System.currentTimeMillis() - millisAntes;
 			paintWorld();
+			
 			checkCollisions();
 			
 			int millisUsados = (int) (System.currentTimeMillis() - millisAntesDeConstruirEscena);
