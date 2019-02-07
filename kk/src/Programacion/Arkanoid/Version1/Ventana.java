@@ -25,7 +25,7 @@ public class Ventana extends Canvas implements Stage{
 	public static final int FPS=100;
 	private BufferStrategy strategy;
 	private long cincoSegundos;
-	
+	public static long millisAntes;
 	private SoundCache soundCache;
 	private SpriteCache spriteCache;
 	private Nave nave;
@@ -271,7 +271,7 @@ public class Ventana extends Canvas implements Stage{
 		
 	public void game() {
 		cincoSegundos = 1000;
-		long millisAntes = System.currentTimeMillis();
+		millisAntes = System.currentTimeMillis();
 		initWorld();
 		while (isVisible()) {
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
