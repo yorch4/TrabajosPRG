@@ -1,5 +1,7 @@
 package Programacion.Arkanoid.Version1;
 
+import java.awt.Rectangle;
+
 public class Ladrillos extends Objetos {
 	private Explosion explosion;
 	
@@ -14,6 +16,12 @@ public class Ladrillos extends Objetos {
 		super.act();
 		
 	}
+	public Rectangle getLadoDerecho() {
+		return new Rectangle(x + width - 1,y + width - 1,1,height);
+	}
+	public Rectangle getLadoIzquierdo() {
+		return new Rectangle(x ,y, 1,height);
+	}
 	
 	public void collision(Objetos a){
 		if (a instanceof Pelota) {
@@ -22,5 +30,6 @@ public class Ladrillos extends Objetos {
 			stage.getSoundCache().playSound("choque.wav");
 		}
 	}
+
 	
 }

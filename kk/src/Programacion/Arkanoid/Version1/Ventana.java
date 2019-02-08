@@ -32,7 +32,15 @@ public class Ventana extends Canvas implements Stage{
 	private Pelota pelota;
 	private List<Explosion> explosion = new ArrayList<Explosion>();
 	private List<Objetos> objetos = new ArrayList<Objetos>();
+	private static Ventana instancia = null;
 
+	public static Ventana getInstancia() {
+		if (instancia == null) {
+			instancia = new Ventana();
+		}
+		return instancia;
+	}
+	
 	public Ventana() {
 		spriteCache = new SpriteCache();
 		soundCache = new SoundCache();
@@ -210,14 +218,7 @@ public class Ventana extends Canvas implements Stage{
 				pelota.collision(a1);
 				a1.collision(pelota);
 			}
-		  for (int j = i+1; j < objetos.size(); j++) {
-		  	Objetos a2 = (Objetos)objetos.get(j);
-		  	Rectangle r2 = a2.getBounds();
-		  	if (r1.intersects(r2)) {
-		  		a1.collision(a2);
-		  		a2.collision(a1);
-		  	}
-		  }
+
 		}
 		if (pelotaBounds.intersects(naveBounds)) {
 			pelota.collision(nave);
