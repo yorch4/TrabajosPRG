@@ -42,7 +42,7 @@ float pixelFrame = 3;
 	
 	public void collision(Objetos a){
 		if (a instanceof Ladrillos) {
-			choqueLadrillo(Ladrillo o);
+			choqueLadrillo((Ladrillos) a);
 		}
 		
 		if (a instanceof Nave) {
@@ -53,29 +53,33 @@ float pixelFrame = 3;
 	
 	
 	
-	public void choqueLadrillo(Ladrillo o) {
-		Rectangle ladoDerecho  = new Rectangle(x + width - 1, y, 1, height);
-		Rectangle ladoIzquierdo = new Rectangle(x, y, 1, height);
-		Rectangle ladoArriba = new Rectangle(x, y + 1, width, 1);
-		Rectangle ladoAbajo = new Rectangle(x, y + height - 1, width, 1);
-		boolean arriba = false, abajo = false, derecha = false, izquierda = false;
+	public void choqueLadrillo(Ladrillos a) {
+		Rectangle ladoDerecho  = new Rectangle(a.x + a.width - 1, a.y, 1, a.height);
+		Rectangle ladoIzquierdo = new Rectangle(a.x, a.y, 1, a.height);
+		Rectangle ladoArriba = new Rectangle(a.x, a.y + 1, a.width, 1);
+		Rectangle ladoAbajo = new Rectangle(a.x, a.y + a.height - 1, a.width, 1);
+		boolean esquina = false;
 		
-		
-		if (Ventana.getInstancia().pelotaBounds.intersects(ladoArriba)) {
-			arriba = true;
+		if (this.getBounds().intersects(ladoAbajo) && this.getBounds().intersects(ladoIzquierdo)) {
+			esquina = true;
+			this.trayectoria.setPendiente(-1.5f, coordenadas);
 		}
-		if (Ventana.getInstancia().pelotaBounds.intersects(ladoAbajo)) {
-			abajo = true;
-		}
-		if (Ventana.getInstancia().pelotaBounds.intersects(ladoDerecho)) {
-			derecha = true;
-		}
-		if (Ventana.getInstancia().pelotaBounds.intersects(ladoIzquierdo)) {
-			izquierda = true;
+		if (this.getBounds().intersects(ladoAbajo) && this.getBounds().intersects(ladoDerecho)) {
+			esquina = true;
+			this.trayectoria.setPendiente(1.5f, coordenadas);
 		}
 		
-		if (izquierda == true && abajo == true) {
-			
+		if (this.getBounds().intersects(ladoIzquierdo) && esquina == false) {
+			this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
+		}
+		if (this.getBounds().intersects(ladoDerecho) && esquina == false) {
+			this.trayectoria.reflejarHaciaDerecha(this.coordenadas);
+		}
+		if (this.getBounds().intersects(ladoArriba) && esquina == false) {
+			this.trayectoria.reflejarHaciaArriba(this.coordenadas);
+		}
+		if (this.getBounds().intersects(ladoAbajo) && esquina == false) {
+			this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
 		}
 	}
 	
