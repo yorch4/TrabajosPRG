@@ -47,7 +47,8 @@ float pixelFrame = 3;
 		
 		if (a instanceof Nave) {
 			stage.getSoundCache().playSound("salto.wav");
-			this.trayectoria.reflejarVerticalmenteRespectoAPunto(this.coordenadas);
+			//this.trayectoria.reflejarVerticalmenteRespectoAPunto(this.coordenadas);
+			choqueNave((Nave)a);
 		}
 	}
 	
@@ -80,6 +81,28 @@ float pixelFrame = 3;
 		}
 		if (this.getBounds().intersects(ladoAbajo) && esquina == false) {
 			this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
+		}
+	}
+	
+	public void choqueNave (Nave a) {
+		Rectangle ladoDerecho  = new Rectangle(a.x + a.width - 8, a.y, 8, a.height);
+		Rectangle ladoIzquierdo = new Rectangle(a.x, a.y, 8, a.height);
+		Rectangle ladoMedio = new Rectangle(a.x + 9, a.y, a.width - 8, a.height);
+		
+		boolean borde = false;
+		
+		if (this.getBounds().intersects(ladoIzquierdo)) {
+			this.trayectoria.setPendiente(0.9f, coordenadas);
+			borde = true;
+		}
+		
+		if (this.getBounds().intersects(ladoDerecho)) {
+			this.trayectoria.setPendiente(-0.9f, coordenadas);
+			borde = true;
+		}
+		
+		if (this.getBounds().intersects(ladoMedio) && borde == false) {
+			this.trayectoria.reflejarHaciaArriba(coordenadas);
 		}
 	}
 	

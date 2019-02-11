@@ -161,8 +161,8 @@ public class Ventana extends Canvas implements Stage{
 		pelota = new Pelota(this);
 		pelota.setX(nave.x + nave.getWidth() + 2);
 		pelota.setY(nave.y + pelota.getHeight());
-		pelota.setVx(3);
-		pelota.setVy(3);
+		pelota.setVx(2);
+		pelota.setVy(2);
 
 		
 		
@@ -172,11 +172,11 @@ public class Ventana extends Canvas implements Stage{
 
 	public void updateWorld() { 
 		if (pelota.lanzado) {
+			soundCache.playSound("salto.wav");
 			pelota.act();
 		} else {
 			if (cincoSegundos >= 5000) {
 				pelota.lanzado = true;
-				pelota.act();
 			} else {
 				pelotaPegada();
 			}
