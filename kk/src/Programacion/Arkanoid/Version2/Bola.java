@@ -184,7 +184,7 @@ public class Bola extends Actor {
 			colisionConLadrillo(actorColisionado);
 		}
 		else if (actorColisionado instanceof Nave) { // Colisi�n con nave
-			
+			CacheRecursos.getInstancia().playSonido("salto.wav");
 			colisionConNave((Nave)  actorColisionado);
 		}
 	}

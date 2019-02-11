@@ -26,12 +26,14 @@ public class Fase01 extends Fase {
 	    int margenIzquierdo = (Arkanoid.ANCHO % (Ladrillo.ANCHO + Ladrillo.ESPACIO_ENTRE_LADRILLOS)) / 2;
 	   	    
 	    // Creamos las filas
-	    for (int j = 0; j < 5; j++) {
-	    	for (int i = 0; i < numLadrillosPosibles; i++) {
-		    	Ladrillo l = new Ladrillo(i*34,j * 34,j);
+	    for (int j = 0; j < 1; j++) {
+	    	for (int i = 0; i < 2 - 1; i++) {
+		    	Ladrillo l = new Ladrillo(margenIzquierdo + i*34,j * 34,j);
 		    	actores.add(l);
 		    }
 	    }
 	}
 
 }
+//5
+//numLadrillosPosibles

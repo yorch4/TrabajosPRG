@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Ladrillo extends Actor {
 	// Damos un ancho y un alto espec�fico al ladrillo. Suponemos que todos los ladrillos ser�n iguales
-	public static final int ANCHO = 30;
-	public static final int ALTO = 20;
+	public static final int ANCHO = 32;
+	public static final int ALTO = 32;
 	public static final int ESPACIO_ENTRE_LADRILLOS = 2;
 	
 	
@@ -45,6 +45,8 @@ public class Ladrillo extends Actor {
 		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("pinkBricks.png"));
 		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("yellowBricks.png"));
 		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("greenBricks.png"));
+		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("ironBrick.png"));
+		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("rompeBrick.png"));
 		
 		this.spriteActual = nuevosSprites.get(imagen);
 	}

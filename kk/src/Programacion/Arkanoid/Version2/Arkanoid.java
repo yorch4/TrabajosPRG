@@ -43,6 +43,7 @@ public class Arkanoid extends Canvas {
 	// Lista con actores nuevos que se deben incorporar en la siguiente iteraci�n del juego
 	List<Actor> actoresAInsertar = new ArrayList<Actor>();
 	private boolean fase1Acabada = false;
+	private boolean faseFinal = false;
 	
 	/**
 	 * Getter Singleton
@@ -131,7 +132,8 @@ public class Arkanoid extends Canvas {
 		if (fase1Acabada == false) {
 			this.faseActiva = new Fase01();
 		} else {
-		//	this.faseActiva = new Fase02();
+			this.faseActiva = new Fase02();
+			faseFinal = true;
 		}
 		this.faseActiva.inicializaFase();
 		// Agregamos los actores de la primera fase a nuestro juego
@@ -234,6 +236,7 @@ public class Arkanoid extends Canvas {
 			// Actualizamos y pintamos el nuevo frame
 			updateWorld();
 			paintWorld();
+			faseTerminada();
 			// Calculamos la cantidad de milisegundos que se ha tardado en realizar un nuevo frame del juego
 			int millisUsados = (int) (System.currentTimeMillis() - millisAntesDeConstruirEscena);
 			// Hago que el programa duerma lo suficiente para que realmente se ejecuten la cantidad de FPS
@@ -247,6 +250,15 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
+	public void faseTerminada() {
+		if (this.actores.size() <= 2 && faseFinal == false) {
+			fase1Acabada = true;
+			System.out.println("Fase acabada");
+			bola.trayectoria = null;
+			game();
+		}
+		fase1Acabada = false;
+	}
 	
 	/**
 	 * M�todo que permite agregar un nuevo actor
