@@ -27,7 +27,7 @@ public class Fase01 extends Fase {
 	   	    
 	    // Creamos las filas
 	    for (int j = 0; j < 1; j++) {
-	    	for (int i = 0; i < 2 - 1; i++) {
+	    	for (int i = 0; i < 1; i++) {
 		    	Ladrillo l = new Ladrillo(margenIzquierdo + i*34,j * 34,j);
 		    	actores.add(l);
 		    }
@@ -35,5 +35,6 @@ public class Fase01 extends Fase {
 	}
 
 }
+
 //5
 //numLadrillosPosibles

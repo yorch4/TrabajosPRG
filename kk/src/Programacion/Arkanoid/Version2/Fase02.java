@@ -63,7 +63,7 @@ public class Fase02 extends Fase {
 	    for (int x=0; x < matriz.length; x++) {
 	        for (int y=0; y < matriz[x].length; y++) {
 	        	if (matriz[x][y] != 10) {
-		        	Ladrillo l = new Ladrillo((Arkanoid.ANCHO/2 - Ladrillo.ANCHO*COLUMNAS) + x*34,y * 34,matriz[x][y]);
+		        	Ladrillo l = new Ladrillo((Arkanoid.ANCHO/2 - Ladrillo.ANCHO*COLUMNAS/2) + x*34,y * 34,matriz[x][y]);
 			    	actores.add(l);
 	        	}
 	        }

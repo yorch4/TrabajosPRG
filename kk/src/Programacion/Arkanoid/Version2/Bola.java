@@ -17,9 +17,9 @@ public class Bola extends Actor {
 	// Pienso que, aunque m�s adelante en el juego pueda haber varias bolas, en principio su di�metro no cambia
 	public static final int DIAMETRO = 15;
 	// Segundos que se puede esperar con la bola quieta
-	public static final int SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO = 5;
+	public int SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO = 5;
 	// La siguiente variable nos ayuda a contar el tiempo que ha pasado desde que se inicializa la bola
-	private long millisDesdeInicializacion = new Date().getTime();
+	public long millisDesdeInicializacion = new Date().getTime();
 	
 	// La bola se mover� en una determinada recta (trayectoria) con una determinada velocidad
 	public TrayectoriaRecta trayectoria = null;
@@ -27,12 +27,13 @@ public class Bola extends Actor {
 	// aunque eso no quita que sigan existiendo las coordenades x e y del supertipo Actor. De hecho, cada vez que
 	// actualizamos las coordenadas flotantes tambi�n actualizar� las coordenadas enteras.
 	private PuntoAltaPrecision coordenadas = null;
-	private float velocidadPorFrame = 2.5f; // Velocidad inicial de la bola, expresada en pixels por frame
+	public float velocidadPorFrame = 2.5f; // Velocidad inicial de la bola, expresada en pixels por frame
 	// La velocidad de la Bola aumentar� conforme vaya aumentando el n�mero de frames generados con el siguiente factor
 	private float factorIncrementoVelocidadBola = 1.00035f;
 	// M�xima velocidad posible a alcanzar
-	private static final float MAXIMA_VELOCIDAD = 8;
-	
+	private static final float MAXIMA_VELOCIDAD = 6;
+	private static boolean musicaGameOver = false;
+	public boolean vidaMenos = false;
 	
 	/**
 	 * 
@@ -66,7 +67,17 @@ public class Bola extends Actor {
 				this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
 			}
 			else if (this.y > Arkanoid.ALTO - DIAMETRO) {
-				this.trayectoria.reflejarHaciaArriba(this.coordenadas);
+				Arkanoid.getInstancia().vidas--;
+				if (Arkanoid.getInstancia().gameOver() == false) {
+					vidaMenos = true;
+					Arkanoid.getInstancia().reiniciar();
+				} else {
+					this.velocidadPorFrame = 0;
+					if (musicaGameOver == false) {
+						musicaGameOver = true;
+						Arkanoid.getInstancia().musicaFondo();
+					}
+				}
 			}
 			// Si la bola se toca el borde por la izquierda o por la derecha, su velocidad cambia de signo
 			else if (this.x < 0) {
@@ -123,7 +134,7 @@ public class Bola extends Actor {
 	 * @param xDestino
 	 * @param yDestino
 	 */
-	private void iniciarMovimiento (int xDestino, int yDestino) {
+	public void iniciarMovimiento (int xDestino, int yDestino) {
 		if (trayectoria == null) {
 			// Si los valores del punto de destino son "-1" indica ue debemos hacer una trayectoria por defecto
 			if (xDestino == -1 && yDestino == -1) {
@@ -251,28 +262,48 @@ public class Bola extends Actor {
 			return;
 		}
 		if (abajo) {
-			this.y = actorColisionado.y + actorColisionado.alto;
-			this.coordenadas.y = this.y;
-			this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
+			if (this.y < rectAbajoActor.y) {
+				this.y = rectAbajoActor.y + 2;
+				this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
+			} else {
+				this.y = actorColisionado.y + actorColisionado.alto;
+				this.coordenadas.y = this.y;
+				this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
+			}
 			return;
 		}
 		if (arriba) {
+			if (this.y + this.alto > rectAbajoActor.y) {
+				this.y = rectAbajoActor.y - this.alto;
+				this.trayectoria.reflejarHaciaArriba(this.coordenadas);
+			} else {
 			this.y = actorColisionado.y;
 			this.coordenadas.y = this.y;
 			this.trayectoria.reflejarHaciaArriba(this.coordenadas);
 			return;
+			}
 		}
 		if (izquierda) {
+			if (this.x + this.ancho > rectAbajoActor.x) {
+				this.x = rectAbajoActor.x - this.ancho;
+				this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
+			} else {
 			this.x = actorColisionado.x;
 			this.coordenadas.x = this.x;
 			this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
 			return;
+			}
 		}
 		if (derecha) {
+			if (this.x < rectAbajoActor.x) {
+				this.x = rectAbajoActor.x + 2;
+				this.trayectoria.reflejarHaciaDerecha(this.coordenadas);
+			} else {
 			this.x = actorColisionado.x + actorColisionado.ancho;
 			this.coordenadas.x = this.x;
 			this.trayectoria.reflejarHaciaDerecha(this.coordenadas);
 			return;
+			}
 		}
 	}
 	

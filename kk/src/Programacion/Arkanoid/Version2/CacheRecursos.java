@@ -94,6 +94,10 @@ public class CacheRecursos {
 		((AudioClip)hmRecursos.get(nombreFichero)).play();
 	}
 	
+	public void stopSonido(String nombreFichero) {
+		((AudioClip)hmRecursos.get(nombreFichero)).stop();
+	}
+	
 	/**
 	 * Reproduce un archivo de sonido en bucle
 	 * @param name

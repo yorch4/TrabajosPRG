@@ -44,6 +44,7 @@ public class Arkanoid extends Canvas {
 	List<Actor> actoresAInsertar = new ArrayList<Actor>();
 	private boolean fase1Acabada = false;
 	private boolean faseFinal = false;
+	public int vidas = 3;
 	
 	/**
 	 * Getter Singleton
@@ -215,6 +216,21 @@ public class Arkanoid extends Canvas {
 		for (Actor actor : this.actores) {
 			actor.paint(g);
 		}
+		
+		for (int i = 0; i < vidas; i++) {
+			if (i == 0) {
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4, ALTO - 25, this);
+			}
+			if (i == 1) {
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 18, ALTO - 25, this);
+			}
+			if (i == 2) {
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 36, ALTO - 25, this);
+			}
+		}
+		
+		if (gameOver())
+			g.drawImage(CacheRecursos.getInstancia().getImagen("fondoGameOver.png"), 0, 0, this);
 		// Una vez construida la escena nueva, la mostramos.
 		strategy.show();
 	}
@@ -226,9 +242,13 @@ public class Arkanoid extends Canvas {
 	public void game() {
 		// Inicializaci�n del juego
 		Toolkit.getDefaultToolkit().sync();
-		initWorld();
+		if (bola.vidaMenos != true) {
+			initWorld();
+		
+		}
+		bola.vidaMenos = false;
 		// Sonido de comienzo de la fase
-		CacheRecursos.getInstancia().playSonido(this.faseActiva.getNombreSonidoInicio());
+		musicaFondo();
 		// Este bucle se ejecutar� mientras el objeto Canvas sea visible.
 		while (this.isVisible()) {
 			// Tomamos el tiempo en milisegundos antes de repintar el frame
@@ -236,7 +256,11 @@ public class Arkanoid extends Canvas {
 			// Actualizamos y pintamos el nuevo frame
 			updateWorld();
 			paintWorld();
-			faseTerminada();
+			if (this.actores.size() <= 2 && faseFinal == false) {
+				fase1Acabada = true;
+				reiniciar();
+			}
+			gameOver();
 			// Calculamos la cantidad de milisegundos que se ha tardado en realizar un nuevo frame del juego
 			int millisUsados = (int) (System.currentTimeMillis() - millisAntesDeConstruirEscena);
 			// Hago que el programa duerma lo suficiente para que realmente se ejecuten la cantidad de FPS
@@ -250,14 +274,28 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
-	public void faseTerminada() {
-		if (this.actores.size() <= 2 && faseFinal == false) {
-			fase1Acabada = true;
-			System.out.println("Fase acabada");
-			bola.trayectoria = null;
-			game();
+	public void reiniciar() {
+         bola.trayectoria = null;
+         bola.SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO = (int) (bola.millisDesdeInicializacion + (bola.SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO * 1000));
+         bola.velocidadPorFrame = 2.5f;
+         game();
+		
+	}
+	
+	public void musicaFondo() {
+		if (gameOver() == false) {
+			CacheRecursos.getInstancia().playSonido(this.faseActiva.getNombreSonidoInicio());
+		} else {
+			CacheRecursos.getInstancia().stopSonido(this.faseActiva.getNombreSonidoInicio());
+			CacheRecursos.getInstancia().playSonido("gameOver.wav");
 		}
-		fase1Acabada = false;
+	}
+	
+	public boolean gameOver() {
+		if (vidas < 0) {
+			return true;
+		}
+			return false;
 	}
 	
 	/**

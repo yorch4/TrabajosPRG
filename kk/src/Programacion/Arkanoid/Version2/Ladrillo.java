@@ -14,7 +14,8 @@ public class Ladrillo extends Actor {
 	public static final int ANCHO = 32;
 	public static final int ALTO = 32;
 	public static final int ESPACIO_ENTRE_LADRILLOS = 2;
-	
+	public  int numImagen;
+	public  boolean listoParaRomper = false;
 	
 	/**
 	 * Constructor
@@ -49,6 +50,7 @@ public class Ladrillo extends Actor {
 		nuevosSprites.add(CacheRecursos.getInstancia().getImagen("rompeBrick.png"));
 		
 		this.spriteActual = nuevosSprites.get(imagen);
+		numImagen = imagen;
 	}
 	/**
 	 * Colisi�n detectada
@@ -57,14 +59,23 @@ public class Ladrillo extends Actor {
 	public void colisionProducidaConOtroActor(Actor actorColisionado) {
 		super.colisionProducidaConOtroActor(actorColisionado);
 		// Si un ladrillo detecta una colisi�n con un objeto de tipo "Bola", debe desaparecer
-		if (actorColisionado instanceof Bola) {
-			eliminar();
-			// Creo un nuevo actor de tipo Explosion y lo centr� respecto a la posici�n del ladrillo
-			Explosion explosion = new Explosion(this.getX(), this.getY());
-			explosion.setX(this.x + Ladrillo.ANCHO / 2 - explosion.getAncho() / 2);
-			Arkanoid.getInstancia().agregarActor(explosion);
-			// Reproduzco el sonido de la explisi�n
-			CacheRecursos.getInstancia().playSonido("choque.wav");
+		if (numImagen!= 5) {
+			if (actorColisionado instanceof Bola) {
+				if (numImagen !=6 || listoParaRomper == true) {
+					eliminar();
+					// Creo un nuevo actor de tipo Explosion y lo centr� respecto a la posici�n del ladrillo
+					Explosion explosion = new Explosion(this.getX(), this.getY());
+					explosion.setX(this.x + Ladrillo.ANCHO / 2 - explosion.getAncho() / 2);
+					Arkanoid.getInstancia().agregarActor(explosion);
+					// Reproduzco el sonido de la explisi�n
+					CacheRecursos.getInstancia().playSonido("choque.wav");
+				} else {
+					CacheRecursos.getInstancia().playSonido("choqueRomper.wav");
+					listoParaRomper = true;
+				}
+			}
+		} else {
+			CacheRecursos.getInstancia().playSonido("choqueHierro.wav");
 		}
 	}
 }
