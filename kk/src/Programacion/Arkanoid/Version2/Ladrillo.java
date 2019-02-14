@@ -14,8 +14,8 @@ public class Ladrillo extends Actor {
 	public static final int ANCHO = 32;
 	public static final int ALTO = 32;
 	public static final int ESPACIO_ENTRE_LADRILLOS = 2;
-	public  int numImagen;
-	public  boolean listoParaRomper = false;
+	public int numImagen;
+	public boolean listoParaRomper = false;
 	
 	/**
 	 * Constructor

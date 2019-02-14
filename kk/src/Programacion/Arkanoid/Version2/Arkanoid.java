@@ -219,18 +219,19 @@ public class Arkanoid extends Canvas {
 		
 		for (int i = 0; i < vidas; i++) {
 			if (i == 0) {
-				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4, ALTO - 25, this);
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4, ALTO - 45, this);
 			}
 			if (i == 1) {
-				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 18, ALTO - 25, this);
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 18, ALTO - 45, this);
 			}
 			if (i == 2) {
-				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 36, ALTO - 25, this);
+				g.drawImage(CacheRecursos.getInstancia().getImagen("vida.png"), ANCHO - ANCHO/4 + 36, ALTO - 45, this);
 			}
 		}
 		
-		if (gameOver())
+		if (gameOver()) {
 			g.drawImage(CacheRecursos.getInstancia().getImagen("fondoGameOver.png"), 0, 0, this);
+		}
 		// Una vez construida la escena nueva, la mostramos.
 		strategy.show();
 	}
@@ -275,8 +276,12 @@ public class Arkanoid extends Canvas {
 	}
 	
 	public void reiniciar() {
+		 actores.remove(this.bola);
+		 if (bola.vidaMenos == false) {
+		 	bola = new Bola();
+		 }
+		 actores.add(bola);
          bola.trayectoria = null;
-         bola.SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO = (int) (bola.millisDesdeInicializacion + (bola.SEGUNDOS_MAXIMA_ESPERA_A_INICIO_DE_MOVIMIENTO * 1000));
          bola.velocidadPorFrame = 2.5f;
          game();
 		
